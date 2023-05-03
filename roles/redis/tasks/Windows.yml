@@ -1,0 +1,11 @@
+# ./roles/redis/tasks/Windows.yml
+- name: Install Redis server
+  win_chocolatey:
+    name: redis-64
+    state: present
+
+- name: Ensure Redis service is running
+  win_service:
+    name: Redis
+    state: started
+    enabled: yes

@@ -1,0 +1,11 @@
+# ./roles/redis/tasks/openSUSE.yml
+- name: Install Redis server
+  zypper:
+    name: redis
+    state: present
+
+- name: Ensure Redis service is running
+  service:
+    name: redis
+    state: started
+    enabled: yes

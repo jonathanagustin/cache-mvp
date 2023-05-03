@@ -1,0 +1,5 @@
+# ./roles/podman/tasks/openSUSE.yml
+- name: Install Podman
+  zypper:
+    name: podman
+    state: present

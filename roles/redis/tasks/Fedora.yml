@@ -1,0 +1,11 @@
+# ./roles/redis/tasks/Fedora.yml
+- name: Install Redis server
+  dnf:
+    name: redis
+    state: present
+
+- name: Ensure Redis service is running
+  service:
+    name: redis
+    state: started
+    enabled: yes

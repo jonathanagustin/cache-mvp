@@ -1,0 +1,9 @@
+---
+# ./roles/redis/tasks/load_fake_data.yml
+- name: Copy fake_data.json to remote server
+  copy:
+    src: "/roles/redis/files/fake_data.json"
+    dest: "/tmp/fake_data.json"
+
+- name: Load fake_data.json into Redis database
+  command: redis-cli -x set fake_data "@/tmp/fake_data.json"

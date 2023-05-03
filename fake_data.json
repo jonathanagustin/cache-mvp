@@ -1,0 +1,83 @@
+{
+  "country": "Fictionland",
+  "military_installations": [
+    {
+      "name": "Fort Alpha",
+      "location": {
+        "latitude": 12.345678,
+        "longitude": 98.765432
+      },
+      "type": "Air Force Base",
+      "personnel": 5000,
+      "aircraft": [
+        {
+          "type": "Fighter Jet",
+          "model": "F-100 Falcon",
+          "quantity": 20
+        },
+        {
+          "type": "Transport Aircraft",
+          "model": "C-200 Atlas",
+          "quantity": 5
+        }
+      ]
+    },
+    {
+      "name": "Camp Bravo",
+      "location": {
+        "latitude": 23.456789,
+        "longitude": 87.654321
+      },
+      "type": "Army Base",
+      "personnel": 10000,
+      "vehicles": [
+        {
+          "type": "Main Battle Tank",
+          "model": "T-300 Titan",
+          "quantity": 50
+        },
+        {
+          "type": "Armored Personnel Carrier",
+          "model": "APC-400 Guardian",
+          "quantity": 100
+        }
+      ]
+    }
+  ],
+  "naval_fleet": [
+    {
+      "type": "Aircraft Carrier",
+      "name": "FNS Invincible",
+      "displacement": 100000,
+      "aircraft": [
+        {
+          "type": "Fighter Jet",
+          "model": "F-100 Falcon",
+          "quantity": 40
+        },
+        {
+          "type": "Helicopter",
+          "model": "H-500 Pegasus",
+          "quantity": 10
+        }
+      ]
+    },
+    {
+      "type": "Destroyer",
+      "name": "FNS Defender",
+      "displacement": 9000,
+      "weapons": [
+        {
+          "type": "Missile",
+          "model": "SM-1 Strike",
+          "quantity": 50
+        },
+        {
+          "type": "Gun",
+          "model": "5-inch Naval Gun",
+          "quantity": 2
+        }
+      ]
+    }
+  ]
+}

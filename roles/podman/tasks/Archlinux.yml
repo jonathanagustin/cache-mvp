@@ -1,0 +1,5 @@
+# ./roles/podman/tasks/Archlinux.yml
+- name: Install Podman
+  pacman:
+    name: podman
+    state: present

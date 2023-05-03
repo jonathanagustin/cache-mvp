@@ -1,0 +1,12 @@
+# ./roles/redis/tasks/Debian.yml
+- name: Install Redis server
+  apt:
+    name: redis-server
+    state: present
+    update_cache: yes
+
+- name: Ensure Redis service is running
+  service:
+    name: redis-server
+    state: started
+    enabled: yes

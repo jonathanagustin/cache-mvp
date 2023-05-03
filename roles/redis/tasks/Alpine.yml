@@ -1,0 +1,12 @@
+# ./roles/redis/tasks/Alpine.yml
+- name: Install Redis server
+  apk:
+    name: redis
+    state: present
+    update_cache: yes
+
+- name: Ensure Redis service is running
+  service:
+    name: redis
+    state: started
+    enabled: yes

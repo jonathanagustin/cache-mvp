@@ -1,0 +1,6 @@
+# ./roles/podman/tasks/Alpine.yml
+- name: Install Podman
+  apk:
+    name: podman
+    state: present
+    update_cache: yes

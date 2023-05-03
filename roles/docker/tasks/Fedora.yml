@@ -1,0 +1,7 @@
+---
+# ./roles/docker/tasks/Fedora.yml
+- name: Install Docker
+  dnf:
+    name: docker-ce
+    state: present
+    enablerepo: docker-ce-stable

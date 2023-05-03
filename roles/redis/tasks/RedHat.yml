@@ -1,0 +1,16 @@
+# ./roles/redis/tasks/RedHat.yml
+- name: Install EPEL repository
+  yum:
+    name: epel-release
+    state: present
+
+- name: Install Redis server
+  yum:
+    name: redis
+    state: present
+
+- name: Ensure Redis service is running
+  service:
+    name: redis
+    state: started
+    enabled: yes

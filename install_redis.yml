@@ -1,0 +1,5 @@
+- name: Install Redis
+  hosts: localhost
+  become: yes
+  roles:
+    - redis

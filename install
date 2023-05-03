@@ -1,0 +1,20 @@
+echo \" <<'POWERSHELL_SCRIPT' >/dev/null # " | Out-Null
+# ===== PowerShell Script Begin =====
+echo "PowerShell"
+Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/jonathanagustin/cache-mvp/main/scripts/powershell.ps1')
+# ====== PowerShell Script End ======
+while ( ! $MyInvocation.MyCommand.Source ) { $input_line = Read-Host }
+exit
+<#
+POWERSHELL_SCRIPT
+
+set +o histexpand 2>/dev/null
+# ===== Bash Script Begin =====
+echo "Bash"
+curl -sSL https://raw.githubusercontent.com/jonathanagustin/cache-mvp/main/scripts/bash.sh -o linux.sh
+chmod +x linux.sh
+./linux.sh
+# ====== Bash Script End ======
+case $- in *"i"*) cat /dev/stdin >/dev/null ;; esac
+exit
+#>

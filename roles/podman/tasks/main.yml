@@ -1,0 +1,4 @@
+---
+# ./roles/podman/tasks/main.yml
+- name: Include distribution-specific tasks
+  include_tasks: "{{ ansible_os_family }}.yml"

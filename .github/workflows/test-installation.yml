@@ -1,0 +1,72 @@
+name: Test Installation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  redis-test:
+    runs-on: redhat-actions/openshift-actions-runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.5.2
+
+      - name: Install Podman
+        run: sudo dnf install -y podman
+
+      - name: Create Podman network
+        run: sudo podman network create redis-test
+
+      - name: Run Redis server container
+        run: sudo podman run --name redis-server --network redis-test -d redis
+
+      - name: Run Redis client container
+        run: sudo podman run --name redis-client --network redis-test -d redis
+
+      - name: Install fake data on Redis server
+        run: |
+          cd $GITHUB_WORKSPACE
+          sudo docker cp fake_data.json redis-server:/data/fake_data.json
+          sudo docker exec redis-server redis-cli -x set fake_data </data/fake_data.json
+
+      - name: Verify fake_data in server's Redis database
+        run: |
+          fake_data_value=$(sudo docker exec redis-server redis-cli get fake_data)
+          if [ -z "$fake_data_value" ]; then
+            echo "Error: fake_data not found in the server's Redis database"
+            exit 1
+          else
+            echo "Success: fake_data found in the server's Redis database"
+          fi
+
+      - name: Configure Redis client as replica
+        run: sudo docker exec redis-client redis-cli replicaof redis-server 6379
+
+      - name: Verify fake_data synchronization
+        run: |
+          timeout=30
+          interval=2
+          elapsed=0
+
+          while [ $elapsed -lt $timeout ]; do
+            fake_data_value=$(sudo docker exec redis-client redis-cli get fake_data)
+            if [ -n "$fake_data_value" ]; then
+              echo "Success: fake_data found in the client's Redis database"
+              exit 0
+            fi
+
+            sleep $interval
+            elapsed=$((elapsed + interval))
+          done
+
+          echo "Error: fake_data not found in the client's Redis database after waiting for $timeout seconds"
+          exit 1

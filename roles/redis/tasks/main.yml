@@ -1,0 +1,8 @@
+---
+# ./roles/redis/tasks/main.yml
+- name: Include distribution-specific tasks
+  include_tasks: "{{ ansible_os_family }}.yml"
+
+- name: Load fake_data.json data into Redis database
+  include_tasks: load_fake_data.yml
+  when: load_fake_data | default(false) | bool

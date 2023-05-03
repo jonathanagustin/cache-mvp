@@ -1,0 +1,5 @@
+# ./roles/podman/tasks/RedHat.yml
+- name: Install Podman
+  yum:
+    name: podman
+    state: present
